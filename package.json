@@ -1,0 +1,24 @@
+{
+  "name": "echojxmes",
+  "version": "1.0.0",
+  "description": "A website with Vercel Speed Insights",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"No tests specified\"",
+    "lint": "echo \"No linter configured\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/echojxmes/echojxmes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/echojxmes/echojxmes/issues"
+  },
+  "homepage": "https://github.com/echojxmes/echojxmes#readme",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
