@@ -411,8 +411,9 @@ body.shake{ animation: shake 0.4s ease infinite; }
   opacity:0; transform:translateY(14px);
   animation:cardIn 0.5s ease forwards;
 }
-.form-field:nth-child(1){ animation-delay:0.1s; }
-.form-field:nth-child(2){ animation-delay:0.2s; }
+
+.form-field:nth-child(1){ animation-delay: 2.1s; }
+.form-field:nth-child(2){ animation-delay: 2.2s; }
 
 .form-field label{
   font-size:11px; letter-spacing:1px; color:var(--blue-bright); font-weight:700;
@@ -442,10 +443,12 @@ body.shake{ animation: shake 0.4s ease infinite; }
 .field-hint{ font-size:10px; color:var(--text-dim); }
 
 .contact-form button{
-  background:transparent; border:1px solid var(--blue-dim); color:var(--blue-bright);
-  border-radius:6px; padding:10px; font-family:var(--mono); font-weight:700; cursor:pointer;
-  transition:border-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+  opacity:0;
+  transform:translateY(14px);
+  animation: cardIn 0.5s ease forwards;
+  animation-delay: 2.3s;
 }
+
 .contact-form button:hover{
   border-color:var(--blue);
   box-shadow:0 0 16px rgba(79,178,255,0.3);
