@@ -944,19 +944,24 @@ fetch('https://api.countapi.xyz/hit/echojxmes/visitors')
 (function(){
   const uptimeEl = document.getElementById('uptimeVal');
   const statusEl = document.querySelector('.status-val.ok');
-  let upSince = Date.now(); // temporary fallback until the fetch resolves
+  if(!uptimeEl){
+    console.warn('uptimeVal element not found in HTML — check your id="uptimeVal" tag exists');
+    return;
+  }
+
+  let upSince = Date.now();
 
   fetch('/api/uptime')
     .then(r => r.json())
     .then(data => {
-      upSince = data.upSince;
-      if (data.status === 'down') {
+      if(data.upSince) upSince = data.upSince;
+      if(data.status === 'down' && statusEl){
         statusEl.textContent = 'DEGRADED';
         statusEl.classList.remove('ok');
         statusEl.style.color = '#ff5c7a';
       }
     })
-    .catch(() => {});
+    .catch(err => console.warn('uptime fetch failed', err));
 
   function tick(){
     const diff = Math.floor((Date.now() - upSince) / 1000);
