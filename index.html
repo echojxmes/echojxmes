@@ -517,7 +517,15 @@ body.shake{ animation: shake 0.4s ease infinite; }
     93%{ opacity:0.4; transform:translate(-2px,0); }
   }
 
-  .crumb-wrap{ position:relative; opacity:0; transform:translateY(-6px); animation: fadeDown 0.6s ease forwards; animation-delay:0.1s; }
+  .crumb-wrap{
+  position:relative;
+  z-index:9999;
+}
+
+.crumb-menu{
+  position:absolute;
+  z-index:9999;
+}
 
 .crumb{
   font-size:13px; letter-spacing:0.5px; color:var(--text-dim);
@@ -682,7 +690,7 @@ body.shake{ animation: shake 0.4s ease infinite; }
     <a href="/">home</a>
     <a href="/faq.html">faq</a>
     <a href="/changelog.html">changelog</a>
-    <a href="/writing">writing</a>
+    <a href="/writing">blogs</a>
   </div>
 </div>
 
