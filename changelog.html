@@ -18,6 +18,15 @@
   <div class="entry"><div class="date">2026-07-25</div><div class="desc">Launched site — links, gear setup, bio</div></div>
 </body>
 
+<script>
+(function(){
+  const wrap = document.getElementById('crumbWrap');
+  const toggle = document.getElementById('crumbToggle');
+  toggle.addEventListener('click', (e) => { e.stopPropagation(); wrap.classList.toggle('open'); });
+  document.addEventListener('click', () => wrap.classList.remove('open'));
+})();
+</script>
+
 <div class="crumb-wrap" id="crumbWrap">
   <button class="crumb" id="crumbToggle">
     <span class="tilde">~</span><span class="sep">/</span><span class="home">changelog</span>
@@ -31,11 +40,4 @@
   </div>
 </div>
 
-<script>
-(function(){
-  const wrap = document.getElementById('crumbWrap');
-  const toggle = document.getElementById('crumbToggle');
-  toggle.addEventListener('click', (e) => { e.stopPropagation(); wrap.classList.toggle('open'); });
-  document.addEventListener('click', () => wrap.classList.remove('open'));
-})();
-</script></html>
+</html>
