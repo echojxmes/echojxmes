@@ -16,4 +16,26 @@
   <div class="entry"><div class="date">2026-07-25</div><div class="desc">Added live GitHub project feed, FAQ, and rates section</div></div>
   <div class="entry"><div class="date">2026-07-25</div><div class="desc">Added self-hosted uptime tracking</div></div>
   <div class="entry"><div class="date">2026-07-25</div><div class="desc">Launched site — links, gear setup, bio</div></div>
-</body></html>
+</body>
+
+<div class="crumb-wrap" id="crumbWrap">
+  <button class="crumb" id="crumbToggle">
+    <span class="tilde">~</span><span class="sep">/</span><span class="home">changelog</span>
+    <span class="crumb-arrow">▾</span>
+  </button>
+  <div class="crumb-menu">
+    <a href="/">home</a>
+    <a href="/faq.html">faq</a>
+    <a href="/changelog.html">changelog</a>
+    <a href="/writing">writing</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  const wrap = document.getElementById('crumbWrap');
+  const toggle = document.getElementById('crumbToggle');
+  toggle.addEventListener('click', (e) => { e.stopPropagation(); wrap.classList.toggle('open'); });
+  document.addEventListener('click', () => wrap.classList.remove('open'));
+})();
+</script></html>
