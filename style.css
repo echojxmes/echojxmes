@@ -1,10 +1,41 @@
-body{
-    background:#0f1117;
-    color:white;
-    font-family:Arial;
-    text-align:center;
+body {
+    background: #0b0b0b;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-h1{
-    font-size:70px;
+.logo {
+    text-align: center;
+}
+
+.logo pre {
+    display: inline-block;
+    margin: 0;
+    white-space: pre;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 15px;
+    line-height: 1.05;
+
+    /* White → Blue gradient */
+    background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #dfe9ff 45%,
+        #9dbfff 75%,
+        #5a8dff 100%
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Pixel shadow */
+    text-shadow:
+        2px 2px 0 #1b3f7a,
+        4px 4px 0 #122c55,
+        6px 6px 0 #0b1b35;
+
+    filter: drop-shadow(0 0 12px rgba(80,150,255,.35));
 }
