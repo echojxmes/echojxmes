@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:title" content="echojxmes">
+<meta property="og:description" content="Making things break, then fixing them on camera.">
+<meta property="og:image" content="echojxmes-logo-square.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="echojxmes-logo-square.png">
+<link rel="icon" type="image/png" href="echojxmes-logo-square.png">
 <title>echojxmes</title>
 <link rel="icon" type="image/svg+xml" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,6 +28,80 @@
     --mono: 'JetBrains Mono', monospace;
     --pixel: 'Press Start 2P', monospace;
   }
+
+  .bio{
+  margin-top:22px; max-width:480px; text-align:center;
+  font-size:13px; line-height:1.7; color:#8fa0b0;
+  opacity:0; animation: fadeUp 0.7s ease forwards; animation-delay:1.65s;
+}
+.bio strong{ color:var(--blue-bright); }
+
+.section-label{
+  width:100%; display:flex; align-items:center; gap:10px;
+  margin-top:44px; margin-bottom:16px;
+  font-size:11px; letter-spacing:3px; color:#3a4856;
+}
+.section-label .line{ flex:1; height:1px; background:linear-gradient(90deg, var(--panel-border), transparent); }
+
+.card-text{ display:flex; flex-direction:column; gap:3px; }
+.card-title{ font-weight:700; font-size:15px; }
+.card-stat{ font-size:11px; color:var(--text-dim); letter-spacing:0.5px; }
+.card-sub{ display:block; margin-top:6px; font-size:11px; color:var(--blue-dim); text-decoration:underline; }
+.card-sub:hover{ color:var(--blue-bright); }
+
+.partners{ margin-top:6px; width:100%; display:flex; flex-wrap:wrap; justify-content:center; gap:22px; opacity:0.75; }
+.partner-chip{ font-size:11px; letter-spacing:1px; color:var(--text-dim); border:1px solid var(--panel-border); border-radius:5px; padding:8px 14px; }
+
+.content-strip{ margin-top:10px; width:100%; display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+@media (max-width:520px){ .content-strip{ grid-template-columns:1fr; } }
+.content-card{
+  border:1px solid var(--panel-border); background:rgba(10,13,18,0.8); border-radius:8px;
+  overflow:hidden; text-decoration:none; color:var(--text);
+  opacity:0; transform:translateY(14px); animation:cardIn 0.5s ease forwards;
+  transition:border-color 0.25s ease, transform 0.25s ease;
+}
+.content-card:hover{ border-color:var(--blue-dim); transform:translateY(-3px); }
+.content-thumb{ width:100%; aspect-ratio:16/9; background:#0a0c10; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.content-thumb img{ width:100%; height:100%; object-fit:cover; }
+.content-thumb .play{
+  position:absolute; width:34px; height:34px; border-radius:50%;
+  background:rgba(6,8,10,0.55); border:1px solid rgba(79,178,255,0.6);
+  display:flex; align-items:center; justify-content:center; color:var(--blue-bright); font-size:12px;
+}
+.content-meta{ padding:10px 12px; }
+.content-title{ font-size:12px; font-weight:700; line-height:1.4; }
+.content-plat{ font-size:10px; color:var(--text-dim); margin-top:4px; letter-spacing:0.5px; }
+
+.status-box{
+  margin-top:10px; width:100%; border:1px solid var(--panel-border);
+  background:rgba(8,10,14,0.85); border-radius:8px; padding:16px 18px;
+  font-size:12px; line-height:2;
+}
+.status-row{ display:flex; justify-content:space-between; }
+.status-key{ color:var(--text-dim); letter-spacing:1px; }
+.status-val{ color:var(--blue-bright); }
+.status-val.ok{ color:#4fffb0; }
+.status-val .blinker{
+  display:inline-block; width:6px; height:6px; border-radius:50%;
+  background:#4fffb0; margin-right:6px; animation:pulse 1.6s ease-in-out infinite;
+  box-shadow:0 0 8px rgba(79,255,176,0.7);
+}
+
+.glitch-overlay{
+  position:fixed; inset:0; z-index:999; display:none; align-items:center; justify-content:center;
+  background:rgba(3,4,6,0.92); font-family:var(--pixel); color:var(--blue-bright);
+  text-align:center; text-shadow:var(--glow); font-size:clamp(18px,4vw,32px);
+  letter-spacing:2px; animation: overlayFlicker 0.12s steps(2) infinite;
+}
+.glitch-overlay.show{ display:flex; }
+@keyframes overlayFlicker{ 0%,100%{ opacity:1; } 50%{ opacity:0.85; } }
+body.shake{ animation: shake 0.4s ease infinite; }
+@keyframes shake{
+  0%,100%{ transform:translate(0,0); }
+  25%{ transform:translate(-2px,1px); }
+  50%{ transform:translate(2px,-1px); }
+  75%{ transform:translate(-1px,-1px); }
+}
 
   *{box-sizing:border-box;}
 
@@ -337,6 +418,7 @@
     flex-direction:column;
     gap:14px;
   }
+  
 
   .card{
     --d:0s;
@@ -444,6 +526,8 @@
 </head>
 <body>
 
+  <div class="glitch-overlay" id="glitchOverlay">CONTAINER BREACHED</div>
+
 <div class="wrap">
 
   <div class="crumb">
@@ -461,16 +545,19 @@
   </div>
 
   <div class="tagline"><span class="slash">//</span> CHASING BUGS THROUGH THE STACK TRACE</div>
-  <div class="tagline"><span class="slash">//</span> hey there! I'm a 13 year old software engineer with experience in many languages (Lua, Python, TypeScript, etc.) I have mastered Git and am open to any people looking to hire me as a developer. My prices are listed down below! Many of my social links are also down below, so feel free to follow me there (or don't). </div>
+  <div class="bio"><span class="slash">//</span> hey there! I'm a 13 year old software engineer with experience in many languages (Lua, Python, TypeScript, etc.) I have mastered Git and am open to any people looking to hire me as a developer. My prices are listed down below! Many of my social links are also down below, so feel free to follow me there (or don't). </div>
 
   <div class="links">
     <a class="card" href="https://www.tiktok.com/@echojxmes" target="_blank" rel="noopener">
-      <span class="card-left">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        TikTok
-      </span>
-      <span class="arrow">&#8594;</span>
-    </a>
+  <span class="card-left">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    <span class="card-text">
+      <span class="card-title">TikTok</span>
+      <span class="card-stat">128K followers</span>
+    </span>
+  </span>
+  <span class="arrow">&#8594;</span>
+</a>
 
     <a class="card" href="https://www.youtube.com/@echojxmes" target="_blank" rel="noopener">
       <span class="card-left">
@@ -492,6 +579,7 @@
       <span class="card-left">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>
         Business Inquiries
+        <a class="card-sub" href="media-kit.pdf" target="_blank">view media kit &#8599;</a>
       </span>
       <span class="arrow">&#8594;</span>
     </a>
@@ -575,6 +663,14 @@
   </div>
 </div>
 
+<div class="section-label"><span>SYSTEM STATUS</span><span class="line"></span></div>
+<div class="status-box">
+  <div class="status-row"><span class="status-key">STATUS</span><span class="status-val ok"><span class="blinker"></span>ONLINE</span></div>
+  <div class="status-row"><span class="status-key">LAST DEPLOY</span><span class="status-val" id="lastDeploy">just now</span></div>
+  <div class="status-row"><span class="status-key">VISITORS</span><span class="status-val" id="visitorCount">0000</span></div>
+  <div class="status-row"><span class="status-key">UPTIME</span><span class="status-val" id="uptimeVal">00:00:00</span></div>
+</div>
+
 </div>
 
 <script>
@@ -644,6 +740,55 @@ filterBtns.forEach(btn => {
 
   // start typing after the intro badge fades in
   setTimeout(tick, 700);
+
+
+  // live visitor counter
+(function(){
+  const key = 'echojxmes_visits';
+  let count = parseInt(localStorage.getItem(key) || '4180', 10);
+  count += 1;
+  localStorage.setItem(key, count);
+  document.getElementById('visitorCount').textContent = String(count).padStart(4,'0');
+})();
+
+// fake uptime ticker
+(function(){
+  let seconds = 0;
+  const uptimeEl = document.getElementById('uptimeVal');
+  setInterval(() => {
+    seconds++;
+    const h = String(Math.floor(seconds/3600)).padStart(2,'0');
+    const m = String(Math.floor((seconds%3600)/60)).padStart(2,'0');
+    const s = String(seconds%60).padStart(2,'0');
+    uptimeEl.textContent = `${h}:${m}:${s}`;
+  }, 1000);
+})();
+
+// last deploy — update this date whenever you actually redeploy
+(function(){
+  const deployDate = new Date('2026-07-25T00:00:00');
+  const diffH = Math.floor((Date.now() - deployDate.getTime()) / 3600000);
+  document.getElementById('lastDeploy').textContent = diffH < 1 ? 'just now' : diffH + 'h ago';
+})();
+
+// konami code easter egg (arrow keys + b + a)
+(function(){
+  const seq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  let pos = 0;
+  const overlay = document.getElementById('glitchOverlay');
+  window.addEventListener('keydown', (e) => {
+    pos = (e.key === seq[pos]) ? pos + 1 : 0;
+    if(pos === seq.length){
+      pos = 0;
+      document.body.classList.add('shake');
+      overlay.classList.add('show');
+      setTimeout(() => {
+        overlay.classList.remove('show');
+        document.body.classList.remove('shake');
+      }, 1600);
+    }
+  });
+})();
 </script>
 
 </body>
