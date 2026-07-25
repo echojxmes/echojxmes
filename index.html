@@ -448,7 +448,6 @@ body.shake{ animation: shake 0.4s ease infinite; }
   animation: cardIn 0.5s ease forwards;
   animation-delay: 2.3s;
 }
-
 .contact-form button:hover{
   border-color:var(--blue);
   box-shadow:0 0 16px rgba(79,178,255,0.3);
@@ -517,6 +516,35 @@ body.shake{ animation: shake 0.4s ease infinite; }
     91%{ opacity:0.6; transform:translate(2px,1px); }
     93%{ opacity:0.4; transform:translate(-2px,0); }
   }
+
+  .crumb-wrap{ position:relative; opacity:0; transform:translateY(-6px); animation: fadeDown 0.6s ease forwards; animation-delay:0.1s; }
+
+.crumb{
+  font-size:13px; letter-spacing:0.5px; color:var(--text-dim);
+  display:flex; align-items:center; gap:8px;
+  background:transparent; border:none; cursor:pointer; font-family:var(--mono);
+  padding:6px 10px; border-radius:5px; transition:background 0.2s ease;
+}
+.crumb:hover{ background:rgba(79,178,255,0.06); }
+.crumb .tilde{ color:var(--blue); text-shadow:var(--glow); }
+.crumb .sep{ color:#33414f; }
+.crumb .home{ color:var(--blue-bright); }
+.crumb-arrow{ font-size:10px; color:var(--text-dim); transition:transform 0.2s ease; }
+.crumb-wrap.open .crumb-arrow{ transform:rotate(180deg); }
+
+.crumb-menu{
+  position:absolute; top:calc(100% + 6px); left:0;
+  min-width:140px; background:rgba(8,10,14,0.97);
+  border:1px solid var(--panel-border); border-radius:6px;
+  display:none; flex-direction:column; overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,0.4);
+}
+.crumb-wrap.open .crumb-menu{ display:flex; }
+.crumb-menu a{
+  padding:9px 14px; font-size:12px; color:var(--text);
+  text-decoration:none; transition:background 0.15s ease, color 0.15s ease;
+}
+.crumb-menu a:hover{ background:rgba(79,178,255,0.08); color:var(--blue-bright); }
 
   .tagline{
     margin-top:20px;
@@ -645,9 +673,18 @@ body.shake{ animation: shake 0.4s ease infinite; }
 
 <div class="wrap">
 
-  <div class="crumb">
+  <div class="crumb-wrap">
+  <button class="crumb" id="crumbToggle">
     <span class="tilde">~</span><span class="sep">/</span><span class="home">home</span>
+    <span class="crumb-arrow">▾</span>
+  </button>
+  <div class="crumb-menu" id="crumbMenu">
+    <a href="/">home</a>
+    <a href="/changelog.html">changelog</a>
+    <a href="/writing">blogs</a>
+    <a href="/faq.html">faq</a>
   </div>
+</div>
 
   <div class="badge">
     <span class="dot"></span>
@@ -935,6 +972,16 @@ fetch('https://api.countapi.xyz/hit/echojxmes/visitors')
   .catch(() => {});
 
 // uptime 
+
+(function(){
+  const wrap = document.querySelector('.crumb-wrap');
+  const toggle = document.getElementById('crumbToggle');
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    wrap.classList.toggle('open');
+  });
+  document.addEventListener('click', () => wrap.classList.remove('open'));
+})();
 
 (function(){
   const uptimeEl = document.getElementById('uptimeVal');

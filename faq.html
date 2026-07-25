@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>faq — echojxmes</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#060608; --blue:#4fb2ff; --blue-bright:#7fd0ff;
+    --text:#d9e4ee; --text-dim:#5c6b7a; --panel-border:#1c2530;
+  }
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:'JetBrains Mono',monospace;
+    max-width:600px; margin:0 auto; padding:60px 24px; }
+  h1{ color:var(--blue-bright); font-size:18px; letter-spacing:2px; margin-bottom:24px; }
+
+  .faq-list{ display:flex; flex-direction:column; gap:10px; }
+  .faq-item{ border:1px solid var(--panel-border); background:rgba(10,13,18,0.8); border-radius:8px; padding:14px 16px; }
+  .faq-item summary{ cursor:pointer; font-size:13px; font-weight:700; color:var(--blue-bright); list-style:none; }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::before{ content:"+ "; color:var(--blue); }
+  .faq-item[open] summary::before{ content:"– "; }
+  .faq-item p{ margin:10px 0 0; font-size:12px; line-height:1.6; color:var(--text-dim); }
+
+  .crumb-wrap{ position:relative; display:inline-block; }
+  .crumb{
+    font-size:13px; letter-spacing:0.5px; color:var(--text-dim);
+    display:flex; align-items:center; gap:8px;
+    background:transparent; border:none; cursor:pointer; font-family:inherit;
+    padding:6px 10px; border-radius:5px; transition:background 0.2s ease;
+  }
+  .crumb:hover{ background:rgba(79,178,255,0.06); }
+  .crumb .tilde{ color:var(--blue); }
+  .crumb .sep{ color:#33414f; }
+  .crumb .home{ color:var(--blue-bright); }
+  .crumb-arrow{ font-size:10px; color:var(--text-dim); transition:transform 0.2s ease; }
+  .crumb-wrap.open .crumb-arrow{ transform:rotate(180deg); }
+  .crumb-menu{
+    position:absolute; top:calc(100% + 6px); left:0;
+    min-width:140px; background:rgba(8,10,14,0.97);
+    border:1px solid var(--panel-border); border-radius:6px;
+    display:none; flex-direction:column; overflow:hidden;
+    box-shadow:0 8px 24px rgba(0,0,0,0.4);
+  }
+  .crumb-wrap.open .crumb-menu{ display:flex; }
+  .crumb-menu a{ padding:9px 14px; font-size:12px; color:var(--text); text-decoration:none; }
+  .crumb-menu a:hover{ background:rgba(79,178,255,0.08); color:var(--blue-bright); }
+</style></head>
+<body>
+
+  <div class="crumb-wrap" id="crumbWrap">
+    <button class="crumb" id="crumbToggle">
+      <span class="tilde">~</span><span class="sep">/</span><span class="home">faq</span>
+      <span class="crumb-arrow">▾</span>
+    </button>
+    <div class="crumb-menu">
+      <a href="/">home</a>
+      <a href="/faq.html">faq</a>
+      <a href="/changelog.html">changelog</a>
+      <a href="/writing">writing</a>
+    </div>
+  </div>
+
+  <h1 style="margin-top:34px;">// FAQ</h1>
+
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary>Do you need parent approval to hire you?</summary>
+      <p>Yep — I'm 13, so any payments or contracts go through a parent/guardian. It just keeps everything official.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What languages do you know?</summary>
+      <p>Lua, Python, and TypeScript mainly, plus Git for version control.</p>
+    </details>
+    <details class="faq-item">
+      <summary>What's turnaround time like?</summary>
+      <p>Depends on scope — small scripts are usually quick, bigger builds take longer. Message me with details and I'll give you an estimate.</p>
+    </details>
+    <details class="faq-item">
+      <summary>How do I contact you?</summary>
+      <p>Use the Business Inquiries card or the contact form on the home page.</p>
+    </details>
+  </div>
+
+<script>
+(function(){
+  const wrap = document.getElementById('crumbWrap');
+  const toggle = document.getElementById('crumbToggle');
+  toggle.addEventListener('click', (e) => { e.stopPropagation(); wrap.classList.toggle('open'); });
+  document.addEventListener('click', () => wrap.classList.remove('open'));
+})();
+</script>
+</body></html>
