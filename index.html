@@ -405,6 +405,23 @@ body.shake{ animation: shake 0.4s ease infinite; }
     50%,100%{ opacity:0; }
   }
 
+  .contact-form{ width:100%; display:flex; flex-direction:column; gap:16px; margin-top:10px; }
+.form-field{ display:flex; flex-direction:column; gap:6px; }
+.form-field label{
+  font-size:11px; letter-spacing:1px; color:var(--blue-bright); font-weight:700;
+}
+.form-field input, .form-field textarea{
+  background:rgba(10,13,18,0.8); border:1px solid var(--panel-border); border-radius:6px;
+  padding:10px 12px; color:var(--text); font-family:var(--mono); font-size:12px;
+}
+.form-field textarea{ min-height:90px; resize:vertical; }
+.field-hint{ font-size:10px; color:var(--text-dim); }
+.contact-form button{
+  background:transparent; border:1px solid var(--blue-dim); color:var(--blue-bright);
+  border-radius:6px; padding:10px; font-family:var(--mono); font-weight:700; cursor:pointer;
+}
+.contact-form button:hover{ border-color:var(--blue); box-shadow:0 0 12px rgba(79,178,255,0.25); }
+
   /* logo */
   .logo{
     margin-top:26px;
@@ -663,9 +680,18 @@ body.shake{ animation: shake 0.4s ease infinite; }
   <a class="arrow" href="mailto:echojxmes@gmail.com" style="text-decoration:none;">&#8594;</a>
 </div>
 
-<form action="https://formspree.io/f/xpqvoyel" method="POST" class="contact-form">
-  <input type="email" name="email" placeholder="Your Email">
-  <input type="description" name="description" placeholder="A description of what you would like.">
+<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="contact-form">
+  <div class="form-field">
+    <label for="emailField">Your email</label>
+    <input type="email" id="emailField" name="email" placeholder="you@example.com" required>
+    <span class="field-hint">so I can reply to you</span>
+  </div>
+
+  <div class="form-field">
+    <label for="messageField">What do you need built?</label>
+    <textarea id="messageField" name="message" placeholder="describe the project — a bot, a script, a full site, etc." required></textarea>
+  </div>
+
   <button type="submit">SEND &#8594;</button>
 </form>
 
@@ -943,13 +969,22 @@ fetch('/api/last-deploy')
 
 // pulls your real public repos live from GitHub's API — no key needed
 (function(){
-  const username = 'echojxmes'; // <-- set this
-  fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=4`)
-    .then(r => r.json())
+  const username = 'echojxmes'; // <-- set this to your real username
+  const grid = document.getElementById('projectsGrid');
+
+  fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`)
+    .then(r => {
+      if(!r.ok) throw new Error(`GitHub API error: ${r.status}`);
+      return r.json();
+    })
     .then(repos => {
-      const grid = document.getElementById('projectsGrid');
+      const nonForks = repos.filter(r => !r.fork);
+      if(nonForks.length === 0){
+        grid.innerHTML = '<div class="project-loading">no public repos to show yet</div>';
+        return;
+      }
       grid.innerHTML = '';
-      repos.filter(r => !r.fork).forEach(repo => {
+      nonForks.slice(0,4).forEach(repo => {
         const card = document.createElement('a');
         card.className = 'project-card';
         card.href = repo.html_url;
@@ -966,9 +1001,9 @@ fetch('/api/last-deploy')
         grid.appendChild(card);
       });
     })
-    .catch(() => {
-      document.getElementById('projectsGrid').innerHTML =
-        '<div class="project-loading">couldn\'t load repos</div>';
+    .catch(err => {
+      console.error(err);
+      grid.innerHTML = `<div class="project-loading">couldn't load repos (${err.message})</div>`;
     });
 })();
 </script>
