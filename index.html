@@ -14,6 +14,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+
 <style>
   :root{
     --bg:#060608;
@@ -28,6 +29,32 @@
     --mono: 'JetBrains Mono', monospace;
     --pixel: 'Press Start 2P', monospace;
   }
+
+  .pricing-grid{ width:100%; display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+@media (max-width:520px){ .pricing-grid{ grid-template-columns:1fr; } }
+.price-card{
+  border:1px solid var(--panel-border); background:rgba(10,13,18,0.8);
+  border-radius:8px; padding:18px; text-align:center;
+  opacity:0; transform:translateY(14px); animation:cardIn 0.5s ease forwards;
+}
+
+.contact-form{ width:100%; display:flex; flex-direction:column; gap:10px; margin-top:10px; }
+.contact-form input, .contact-form textarea{
+  background:rgba(10,13,18,0.8); border:1px solid var(--panel-border); border-radius:6px;
+  padding:10px 12px; color:var(--text); font-family:var(--mono); font-size:12px;
+}
+.contact-form textarea{ min-height:80px; resize:vertical; }
+.contact-form button{
+  background:transparent; border:1px solid var(--blue-dim); color:var(--blue-bright);
+  border-radius:6px; padding:10px; font-family:var(--mono); font-weight:700; cursor:pointer;
+}
+.contact-form button:hover{ border-color:var(--blue); box-shadow:0 0 12px rgba(79,178,255,0.25); }
+
+
+.price-title{ font-size:12px; color:var(--text-dim); letter-spacing:0.5px; }
+.price-amount{ font-size:24px; font-weight:800; color:var(--blue-bright); margin:8px 0; text-shadow:0 0 12px rgba(79,178,255,0.4); }
+.price-desc{ font-size:11px; color:var(--text-dim); line-height:1.5; }
+  
 
   .bio{
   margin-top:22px; max-width:480px; text-align:center;
@@ -77,6 +104,7 @@
   background:rgba(8,10,14,0.85); border-radius:8px; padding:16px 18px;
   font-size:12px; line-height:2;
 }
+
 .status-row{ display:flex; justify-content:space-between; }
 .status-key{ color:var(--text-dim); letter-spacing:1px; }
 .status-val{ color:var(--blue-bright); }
@@ -114,6 +142,30 @@ body.shake{ animation: shake 0.4s ease infinite; }
     overflow-x:hidden;
     min-height:100%;
   }
+
+  .skills-row{
+  margin-top:18px; width:100%; display:flex; flex-wrap:wrap;
+  justify-content:center; gap:10px;
+  opacity:0; animation: fadeUp 0.7s ease forwards; animation-delay:1.7s;
+}
+.skill-chip{
+  font-size:11px; letter-spacing:1.5px; color:var(--blue-bright);
+  border:1px solid var(--panel-border); border-radius:5px;
+  padding:6px 12px; background:rgba(79,178,255,0.05);
+}
+
+.projects-grid{ width:100%; display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:520px){ .projects-grid{ grid-template-columns:1fr; } }
+.project-loading{ color:var(--text-dim); font-size:12px; text-align:center; grid-column:1/-1; }
+.project-card{
+  border:1px solid var(--panel-border); background:rgba(10,13,18,0.8);
+  border-radius:8px; padding:16px; text-decoration:none; color:var(--text);
+  transition:border-color 0.25s ease, transform 0.25s ease;
+}
+.project-card:hover{ border-color:var(--blue-dim); transform:translateY(-3px); }
+.project-name{ font-weight:700; font-size:14px; color:var(--blue-bright); }
+.project-desc{ font-size:11px; color:var(--text-dim); margin-top:6px; line-height:1.5; min-height:32px; }
+.project-meta{ display:flex; gap:12px; margin-top:10px; font-size:10px; color:var(--text-dim); }
 
   .filters{
   margin-top:22px;
@@ -171,6 +223,23 @@ body.shake{ animation: shake 0.4s ease infinite; }
   transform:translateY(-3px);
 }
 .gear-card.hidden{ display:none; }
+
+.fake-terminal{
+  width:100%; min-height:120px; max-height:220px; overflow-y:auto;
+  border:1px solid var(--panel-border); background:rgba(6,8,10,0.9);
+  border-radius:8px 8px 0 0; padding:14px; font-size:12px; line-height:1.8;
+}
+.term-line{ color:var(--text-dim); white-space:pre-wrap; }
+.term-input-row{
+  display:flex; align-items:center; gap:8px;
+  border:1px solid var(--panel-border); border-top:none;
+  border-radius:0 0 8px 8px; padding:10px 14px; background:rgba(6,8,10,0.9);
+}
+.term-prompt{ color:var(--blue-bright); }
+.term-input{
+  flex:1; background:transparent; border:none; outline:none;
+  color:var(--text); font-family:var(--mono); font-size:12px;
+}
 
 .gear-img{
   width:100%;
@@ -546,6 +615,12 @@ body.shake{ animation: shake 0.4s ease infinite; }
 
   <div class="tagline"><span class="slash">//</span> CHASING BUGS THROUGH THE STACK TRACE</div>
   <div class="bio"><span class="slash">//</span> hey there! I'm a 13 year old software engineer with experience in many languages (Lua, Python, TypeScript, etc.) I have mastered Git and am open to any people looking to hire me as a developer. My prices are listed down below! Many of my social links are also down below, so feel free to follow me there (or don't). </div>
+  <div class="skills-row">
+  <span class="skill-chip">LUA</span>
+  <span class="skill-chip">PYTHON</span>
+  <span class="skill-chip">TYPESCRIPT</span>
+  <span class="skill-chip">GIT</span>
+</div>
 
   <div class="links">
     <a class="card" href="https://www.tiktok.com/@echojxmes" target="_blank" rel="noopener">
@@ -586,6 +661,12 @@ body.shake{ animation: shake 0.4s ease infinite; }
   <a class="arrow" href="mailto:you@example.com" style="text-decoration:none;">&#8594;</a>
 </div>
 
+<form action="https://formspree.io/f/xpqvoyel" method="POST" class="contact-form">
+  <input type="email" name="email" placeholder="echojxmes@gmail.com>
+  <textarea name="message" placeholder="what do you need built?" required></textarea>
+  <button type="submit">SEND &#8594;</button>
+</form>
+
      <a class="card" href="https://github.com/echojxmes" target="_blank" rel="noopener">
   <span class="card-left">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -596,6 +677,34 @@ body.shake{ animation: shake 0.4s ease infinite; }
   <span class="arrow">&#8594;</span>
 </a>
   </div>
+
+  <div class="section-label"><span>RATES</span><span class="line"></span></div>
+<div class="pricing-grid">
+  <div class="price-card">
+    <div class="price-title">Small Script / Automation</div>
+    <div class="price-amount">£25</div>
+    <div class="price-desc">Single-purpose script, quick turnaround</div>
+  </div>
+  <div class="price-card">
+    <div class="price-title">Discord Bot</div>
+    <div class="price-amount">£50</div>
+    <div class="price-desc">Custom commands, moderation, integrations</div>
+  </div>
+  <div class="price-card">
+    <div class="price-title">Full Website</div>
+    <div class="price-amount">£150</div>
+    <div class="price-desc">Design + build, like this one</div>
+  </div>
+</div>
+<p style="text-align:center; font-size:11px; color:var(--text-dim); margin-top:10px;">
+  Prices vary by scope — <a href="mailto:you@example.com" style="color:var(--blue-bright);">message for a quote</a>.
+</p>
+
+<div class="section-label"><span>PROJECTS</span><span class="line"></span></div>
+<div class="projects-grid" id="projectsGrid">
+  <div class="project-loading">loading repos...</div>
+</div>
+
 
   <div class="footer">
   <div class="rule"></div>
@@ -665,6 +774,15 @@ body.shake{ animation: shake 0.4s ease infinite; }
     <!-- copy this block for each product -->
 
   </div>
+</div>
+
+<div class="section-label"><span>TERMINAL</span><span class="line"></span></div>
+<div class="fake-terminal" id="fakeTerminal">
+  <div class="term-line">type <span style="color:var(--blue-bright);">help</span> to get started</div>
+</div>
+<div class="term-input-row">
+  <span class="term-prompt">&gt;</span>
+  <input type="text" id="termInput" class="term-input" autocomplete="off" spellcheck="false">
 </div>
 
 <div class="section-label"><span>SYSTEM STATUS</span><span class="line"></span></div>
@@ -822,6 +940,73 @@ fetch('/api/last-deploy')
         document.body.classList.remove('shake');
       }, 1600);
     }
+  });
+})();
+
+// pulls your real public repos live from GitHub's API — no key needed
+(function(){
+  const username = 'echojxmes'; // <-- set this
+  fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=4`)
+    .then(r => r.json())
+    .then(repos => {
+      const grid = document.getElementById('projectsGrid');
+      grid.innerHTML = '';
+      repos.filter(r => !r.fork).forEach(repo => {
+        const card = document.createElement('a');
+        card.className = 'project-card';
+        card.href = repo.html_url;
+        card.target = '_blank';
+        card.rel = 'noopener';
+        card.innerHTML = `
+          <div class="project-name">${repo.name}</div>
+          <div class="project-desc">${repo.description || 'no description'}</div>
+          <div class="project-meta">
+            <span>&#9733; ${repo.stargazers_count}</span>
+            <span>${repo.language || ''}</span>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    })
+    .catch(() => {
+      document.getElementById('projectsGrid').innerHTML =
+        '<div class="project-loading">couldn\'t load repos</div>';
+    });
+})();
+
+(function(){
+  const output = document.getElementById('fakeTerminal');
+  const input = document.getElementById('termInput');
+
+  const commands = {
+    help: () => 'available: whoami, skills, projects, contact, clear',
+    whoami: () => 'echojxmes — 13yo dev, building things and breaking things on camera',
+    skills: () => 'Lua, Python, TypeScript, Git',
+    projects: () => 'scroll down to the PROJECTS section, or check the GitHub card above',
+    contact: () => 'use the Business Inquiries card up top',
+    clear: () => { output.innerHTML = ''; return null; }
+  };
+
+  input.addEventListener('keydown', (e) => {
+    if(e.key !== 'Enter') return;
+    const raw = input.value.trim();
+    const cmd = raw.toLowerCase();
+    input.value = '';
+
+    const echoLine = document.createElement('div');
+    echoLine.className = 'term-line';
+    echoLine.innerHTML = `<span style="color:var(--blue-bright);">&gt; ${raw}</span>`;
+    output.appendChild(echoLine);
+
+    const handler = commands[cmd];
+    const result = handler ? handler() : `command not found: ${raw}`;
+    if(result){
+      const resLine = document.createElement('div');
+      resLine.className = 'term-line';
+      resLine.textContent = result;
+      output.appendChild(resLine);
+    }
+    output.scrollTop = output.scrollHeight;
   });
 })();
 </script>
