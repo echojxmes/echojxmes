@@ -778,23 +778,6 @@ body.shake{ animation: shake 0.4s ease infinite; }
   </div>
 </div>
 
-<div class="section-label"><span>TERMINAL</span><span class="line"></span></div>
-<div class="fake-terminal" id="fakeTerminal">
-  <div class="term-line">type <span style="color:var(--blue-bright);">help</span> to get started</div>
-</div>
-<div class="term-input-row">
-  <span class="term-prompt">&gt;</span>
-  <input type="text" id="termInput" class="term-input" autocomplete="off" spellcheck="false">
-</div>
-
-<div class="section-label"><span>SYSTEM STATUS</span><span class="line"></span></div>
-<div class="status-box">
-  <div class="status-row"><span class="status-key">STATUS</span><span class="status-val ok"><span class="blinker"></span>ONLINE</span></div>
-  <div class="status-row"><span class="status-key">LAST DEPLOY</span><span class="status-val" id="lastDeploy">just now</span></div>
-  <div class="status-row"><span class="status-key">VISITORS</span><span class="status-val" id="visitorCount">0000</span></div>
-  <div class="status-row"><span class="status-key">UPTIME</span><span class="status-val" id="uptimeVal">100%</span></div>
-</div>
-
 </div>
 
 <script>
@@ -974,42 +957,6 @@ fetch('/api/last-deploy')
       document.getElementById('projectsGrid').innerHTML =
         '<div class="project-loading">couldn\'t load repos</div>';
     });
-})();
-
-(function(){
-  const output = document.getElementById('fakeTerminal');
-  const input = document.getElementById('termInput');
-
-  const commands = {
-    help: () => 'available: whoami, skills, projects, contact, clear',
-    whoami: () => 'echojxmes — 13yo dev, building things and breaking things on camera',
-    skills: () => 'Lua, Python, TypeScript, Git',
-    projects: () => 'scroll up to the PROJECTS section, or check the GitHub card above',
-    contact: () => 'use the Business Inquiries card up top',
-    clear: () => { output.innerHTML = ''; return null; }
-  };
-
-  input.addEventListener('keydown', (e) => {
-    if(e.key !== 'Enter') return;
-    const raw = input.value.trim();
-    const cmd = raw.toLowerCase();
-    input.value = '';
-
-    const echoLine = document.createElement('div');
-    echoLine.className = 'term-line';
-    echoLine.innerHTML = `<span style="color:var(--blue-bright);">&gt; ${raw}</span>`;
-    output.appendChild(echoLine);
-
-    const handler = commands[cmd];
-    const result = handler ? handler() : `command not found: ${raw}`;
-    if(result){
-      const resLine = document.createElement('div');
-      resLine.className = 'term-line';
-      resLine.textContent = result;
-      output.appendChild(resLine);
-    }
-    output.scrollTop = output.scrollHeight;
-  });
 })();
 </script>
 
