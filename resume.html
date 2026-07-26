@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060608; --panel:#0b0d12; --panel-border:#1c2530;
+  --blue:#4fb2ff; --blue-bright:#7fd0ff; --blue-dim:#1c5b8c;
+  --glow:0 0 18px rgba(79,178,255,0.55), 0 0 40px rgba(79,178,255,0.25);
+  --text:#d9e4ee; --text-dim:#5c6b7a;
+  --mono:'JetBrains Mono', monospace; --pixel:'Press Start 2P', monospace;
+}
+*{box-sizing:border-box;}
+html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family:var(--mono); overflow-x:hidden; }
+body{ position:relative; }
+body::before{
+  content:""; position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(79,178,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,178,255,0.035) 1px, transparent 1px);
+  background-size:38px 38px; pointer-events:none; z-index:0;
+  animation: gridDrift 40s linear infinite;
+}
+@keyframes gridDrift{ from{ background-position:0 0, 0 0; } to{ background-position:0 400px, 400px 0; } }
+body::after{
+  content:""; position:fixed; inset:0;
+  background:radial-gradient(ellipse at 50% 20%, rgba(79,178,255,0.10), transparent 60%);
+  pointer-events:none; z-index:0;
+}
+.wrap{ position:relative; z-index:1; max-width:640px; margin:0 auto; padding:56px 24px 80px; }
+
+.nav{ display:flex; flex-wrap:wrap; gap:22px; opacity:0; transform:translateY(-6px); animation: navIn 0.6s ease forwards; animation-delay:0.1s; }
+@keyframes navIn{ to{ opacity:1; transform:translateY(0); } }
+.nav a{ font-size:12px; letter-spacing:1.5px; color:var(--text-dim); text-decoration:none; padding-bottom:4px; position:relative; transition:color 0.2s ease; }
+.nav a:hover{ color:var(--blue-bright); }
+.nav a.active{ color:var(--blue-bright); }
+.nav a.active::after{ content:""; position:absolute; left:0; right:0; bottom:-4px; height:1px; background:var(--blue); box-shadow:0 0 6px rgba(79,178,255,0.6); }
+@media (max-width:480px){ .nav{ gap:14px; } .nav a{ font-size:11px; } }
+
+.page-title{
+  margin-top:34px; font-family:var(--pixel); font-size:clamp(20px,5vw,30px); color:#fff;
+  text-shadow:var(--glow); letter-spacing:1px; opacity:0; animation: fadeUp 0.7s ease forwards; animation-delay:0.25s;
+}
+.page-sub{
+  margin-top:12px; font-size:13px; line-height:1.7; color:#8fa0b0; max-width:480px;
+  opacity:0; animation: fadeUp 0.7s ease forwards; animation-delay:0.4s;
+}
+.page-sub .slash{ color:var(--blue); }
+@keyframes fadeUp{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:translateY(0); } }
+
+.section-label{
+  display:flex; align-items:center; gap:10px; margin-top:40px; margin-bottom:16px;
+  font-size:11px; letter-spacing:3px; color:#3a4856;
+  opacity:0; animation: fadeUp 0.6s ease forwards;
+}
+.section-label .line{ flex:1; height:1px; background:linear-gradient(90deg, var(--panel-border), transparent); }
+
+/* skills */
+.skills-row{ display:flex; flex-wrap:wrap; gap:8px; opacity:0; animation: fadeUp 0.6s ease forwards; animation-delay:0.55s; }
+.skill-chip{
+  border:1px solid var(--panel-border); border-radius:5px; padding:6px 12px;
+  font-size:11px; letter-spacing:1px; color:var(--blue-bright);
+}
+
+/* projects */
+.project-grid{ display:flex; flex-direction:column; gap:12px; opacity:0; animation: fadeUp 0.6s ease forwards; animation-delay:0.65s; }
+.project-card{ border:1px solid var(--panel-border); background:rgba(10,13,18,0.8); border-radius:8px; padding:16px; }
+.project-title{ font-size:13px; font-weight:700; color:var(--blue-bright); }
+.project-desc{ font-size:12px; color:var(--text-dim); margin-top:6px; line-height:1.6; }
+.project-stack{ font-size:10px; color:#3a4856; margin-top:8px; letter-spacing:1px; }
+.project-card a{ color:var(--blue-bright); font-size:11px; text-decoration:underline; }
+
+/* timeline */
+.timeline{ opacity:0; animation: fadeUp 0.6s ease forwards; animation-delay:0.75s; }
+.entry{ border-left:2px solid var(--panel-border); padding-left:16px; margin-bottom:18px; }
+.entry .date{ color:var(--text-dim); font-size:11px; letter-spacing:1px; }
+.entry .desc{ font-size:13px; margin-top:4px; }
+
+/* rates (reused from homepage) */
+.pricing-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:12px;
+  opacity:0; animation: fadeUp 0.6s ease forwards; animation-delay:0.85s;
+}
+@media (max-width:600px){ .pricing-grid{ grid-template-columns:1fr; } }
+.price-card{ border:1px solid var(--panel-border); background:rgba(10,13,18,0.8); border-radius:8px; padding:16px; text-align:center; }
+.price-title{ font-size:12px; color:var(--text-dim); letter-spacing:1px; }
+.price-amount{ font-size:20px; color:var(--blue-bright); font-weight:700; margin-top:6px; }
+.price-desc{ font-size:11px; color:var(--text-dim); margin-top:6px; }
+
+.cta{
+  margin-top:40px; text-align:center; opacity:0; animation: fadeUp 0.6s ease forwards; animation-delay:0.95s;
+}
+.cta a{
+  display:inline-block; border:1px solid var(--blue-dim); color:var(--blue-bright);
+  border-radius:6px; padding:12px 22px; font-weight:700; text-decoration:none; transition:0.2s ease;
+}
+.cta a:hover{ border-color:var(--blue); box-shadow:0 0 16px rgba(79,178,255,0.3); }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition:none !important; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="nav">
+    <a href="/">HOME</a>
+    <a href="/faq.html">FAQ</a>
+    <a href="/changelog.html">CHANGELOG</a>
+    <a href="/writing">BLOGS</a>
+    <a href="/contact.html">CONTACT</a>
+    <a href="/resume.html" class="active">RESUME</a>
+  </nav>
+
+  <div class="page-title">RESUME</div>
+  <div class="page-sub"><span class="slash">//</span> 13-year-old developer. Here's proof I can actually build stuff.</div>
+
+  <div class="section-label"><span>SKILLS</span><span class="line"></span></div>
+  <div class="skills-row">
+    <span class="skill-chip">LUA</span>
+    <span class="skill-chip">PYTHON</span>
+    <span class="skill-chip">TYPESCRIPT</span>
+    <span class="skill-chip">GIT</span>
+    <span class="skill-chip">HTML / CSS</span>
+  </div>
+
+  <div class="section-label"><span>PROJECTS</span><span class="line"></span></div>
+  <div class="project-grid">
+    <!-- EDIT: swap these for his real projects -->
+    <div class="project-card">
+      <div class="project-title">echojxmes.com</div>
+      <div class="project-desc">This site — personal portfolio and freelance page, built from scratch.</div>
+      <div class="project-stack">HTML · CSS · JS</div>
+      <a href="https://github.com/echojxmes/echojxmes" target="_blank" rel="noopener">View on GitHub &#8594;</a>
+    </div>
+    <div class="project-card">
+      <div class="project-title">[Discord bot name]</div>
+      <div class="project-desc">[what it does — moderation, custom commands, etc.]</div>
+      <div class="project-stack">Python / discord.py</div>
+    </div>
+    <div class="project-card">
+      <div class="project-title">[script/automation name]</div>
+      <div class="project-desc">[what problem it solved]</div>
+      <div class="project-stack">Lua / Python</div>
+    </div>
+  </div>
+
+  <div class="section-label"><span>TIMELINE</span><span class="line"></span></div>
+  <div class="timeline">
+    <div class="entry"><div class="date">[year]</div><div class="desc">Started learning to code</div></div>
+    <div class="entry"><div class="date">[year]</div><div class="desc">Built first Discord bot</div></div>
+    <div class="entry"><div class="date">2026</div><div class="desc">Launched echojxmes.com and started taking freelance work</div></div>
+  </div>
+
+  <div class="section-label"><span>RATES</span><span class="line"></span></div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-title">Small Script / Automation</div>
+      <div class="price-amount">£25</div>
+      <div class="price-desc">Single-purpose script, quick turnaround</div>
+    </div>
+    <div class="price-card">
+      <div class="price-title">Discord Bot</div>
+      <div class="price-amount">£50</div>
+      <div class="price-desc">Custom commands, moderation, integrations</div>
+    </div>
+    <div class="price-card">
+      <div class="price-title">Full Website</div>
+      <div class="price-amount">£150</div>
+      <div class="price-desc">Design + build, like this one</div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <a href="/contact.html">GET IN TOUCH &#8594;</a>
+  </div>
+
+</div>
+</body>
+</html>
