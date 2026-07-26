@@ -2,68 +2,83 @@
 <html><head><meta charset="UTF-8"><title>changelog</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#060608; --blue:#4fb2ff; --blue-bright:#7fd0ff;
-    --text:#d9e4ee; --text-dim:#5c6b7a; --panel-border:#1c2530;
-  }
-  body{ margin:0; background:var(--bg); color:var(--text); font-family:'JetBrains Mono',monospace;
-    max-width:600px; margin:0 auto; padding:60px 24px; }
-  h1{ color:var(--blue-bright); font-size:18px; letter-spacing:2px; margin-top:34px; }
-  .entry{ border-left:2px solid var(--panel-border); padding-left:16px; margin-bottom:22px; }
-  .date{ color:var(--text-dim); font-size:11px; letter-spacing:1px; }
-  .desc{ font-size:13px; margin-top:4px; }
-  a{ color:var(--blue-bright); }
+:root{
+  --bg:#060608; --blue:#4fb2ff; --blue-bright:#7fd0ff; --blue-dim:#1c5b8c;
+  --text:#d9e4ee; --text-dim:#5c6b7a; --panel-border:#1c2530;
+  --glow:0 0 18px rgba(79,178,255,0.55), 0 0 40px rgba(79,178,255,0.25);
+}
+*{box-sizing:border-box;}
+body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family:'JetBrains Mono',monospace;
+  overflow-x:hidden; position:relative; min-height:100vh; }
 
-  .crumb-wrap{ position:relative; display:inline-block; z-index:9999; }
-  .crumb{
-    font-size:13px; letter-spacing:0.5px; color:var(--text-dim);
-    display:flex; align-items:center; gap:8px;
-    background:transparent; border:none; cursor:pointer; font-family:inherit;
-    padding:6px 10px; border-radius:5px; transition:background 0.2s ease;
-  }
-  .crumb:hover{ background:rgba(79,178,255,0.06); }
-  .crumb .tilde{ color:var(--blue); }
-  .crumb .sep{ color:#33414f; }
-  .crumb .home{ color:var(--blue-bright); }
-  .crumb-arrow{ font-size:10px; color:var(--text-dim); transition:transform 0.2s ease; }
-  .crumb-wrap.open .crumb-arrow{ transform:rotate(180deg); }
-  .crumb-menu{
-    position:absolute; top:calc(100% + 6px); left:0;
-    min-width:140px; background:rgba(8,10,14,0.97);
-    border:1px solid var(--panel-border); border-radius:6px;
-    display:none; flex-direction:column; overflow:hidden;
-    box-shadow:0 8px 24px rgba(0,0,0,0.4); z-index:9999;
-  }
-  .crumb-wrap.open .crumb-menu{ display:flex; }
-  .crumb-menu a{ padding:9px 14px; font-size:12px; color:var(--text); text-decoration:none; }
-  .crumb-menu a:hover{ background:rgba(79,178,255,0.08); color:var(--blue-bright); }
+body::before{
+  content:""; position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(79,178,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,178,255,0.035) 1px, transparent 1px);
+  background-size:38px 38px; pointer-events:none; z-index:0;
+  animation: gridDrift 40s linear infinite;
+}
+@keyframes gridDrift{ from{ background-position:0 0, 0 0; } to{ background-position:0 400px, 400px 0; } }
+body::after{
+  content:""; position:fixed; inset:0;
+  background:radial-gradient(ellipse at 50% 20%, rgba(79,178,255,0.10), transparent 60%);
+  pointer-events:none; z-index:0;
+}
+
+.wrapper{ position:relative; z-index:1; max-width:600px; margin:0 auto; padding:60px 24px; }
+
+.nav{
+  display:flex; flex-wrap:wrap; gap:22px;
+  opacity:0; transform:translateY(-6px);
+  animation: navIn 0.6s ease forwards; animation-delay:0.1s;
+}
+@keyframes navIn{ to{ opacity:1; transform:translateY(0); } }
+.nav a{
+  font-size:12px; letter-spacing:1.5px; color:var(--text-dim); text-decoration:none;
+  padding-bottom:4px; position:relative; transition:color 0.2s ease;
+}
+.nav a:hover{ color:var(--blue-bright); }
+.nav a.active{ color:var(--blue-bright); }
+.nav a.active::after{
+  content:""; position:absolute; left:0; right:0; bottom:-4px; height:1px;
+  background:var(--blue); box-shadow:0 0 6px rgba(79,178,255,0.6);
+}
+@media (max-width:480px){ .nav{ gap:14px; } .nav a{ font-size:11px; } }
+
+h1{
+  color:var(--blue-bright); font-size:18px; letter-spacing:2px; margin-top:34px;
+  text-shadow:var(--glow);
+  opacity:0; animation: fadeUp 0.7s ease forwards; animation-delay:0.25s;
+}
+@keyframes fadeUp{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:translateY(0); } }
+
+.entry{ border-left:2px solid var(--panel-border); padding-left:16px; margin-bottom:22px; margin-top:24px; }
+.date{ color:var(--text-dim); font-size:11px; letter-spacing:1px; }
+.desc{ font-size:13px; margin-top:4px; }
+a{ color:var(--blue-bright); }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition:none !important; }
+  h1, .nav{ opacity:1; transform:none; }
+}
 </style></head>
 <body>
+<div class="wrapper">
 
-  <div class="crumb-wrap" id="crumbWrap">
-    <button class="crumb" id="crumbToggle">
-      <span class="tilde">~</span><span class="sep">/</span><span class="home">changelog</span>
-      <span class="crumb-arrow">▾</span>
-    </button>
-    <div class="crumb-menu">
-      <a href="/">home</a>
-      <a href="/faq.html">faq</a>
-      <a href="/changelog.html">changelog</a>
-      <a href="/writing">writing</a>
-    </div>
-  </div>
+  <nav class="nav">
+    <a href="/">HOME</a>
+    <a href="/faq.html">FAQ</a>
+    <a href="/changelog.html" class="active">CHANGELOG</a>
+    <a href="/writing">BLOGS</a>
+    <a href="/contact.html">CONTACT</a>
+  </nav>
 
   <h1>// CHANGELOG</h1>
+
   <div class="entry"><div class="date">2026-07-25</div><div class="desc">Added live GitHub project feed, FAQ, and rates section</div></div>
   <div class="entry"><div class="date">2026-07-25</div><div class="desc">Added self-hosted uptime tracking</div></div>
   <div class="entry"><div class="date">2026-07-25</div><div class="desc">Launched site — links, gear setup, bio</div></div>
 
-<script>
-(function(){
-  const wrap = document.getElementById('crumbWrap');
-  const toggle = document.getElementById('crumbToggle');
-  toggle.addEventListener('click', (e) => { e.stopPropagation(); wrap.classList.toggle('open'); });
-  document.addEventListener('click', () => wrap.classList.remove('open'));
-})();
-</script>
+</div>
 </body></html>

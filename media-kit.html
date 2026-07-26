@@ -51,29 +51,24 @@ body::after{
   position:relative; z-index:1; max-width:640px; margin:0 auto;
   padding:56px 24px 80px; display:flex; flex-direction:column; align-items:center;
 }
-.crumb-wrap{ position:relative; z-index:9999; }
-.crumb{
-  font-size:13px; letter-spacing:0.5px; color:var(--text-dim);
-  display:flex; align-items:center; gap:8px;
-  background:transparent; border:none; cursor:pointer; font-family:var(--mono);
-  padding:6px 10px; border-radius:5px; transition:background 0.2s ease;
-  opacity:0; transform:translateY(-6px); animation: fadeDown 0.6s ease forwards; animation-delay:0.1s;
+
+.nav{
+  display:flex; flex-wrap:wrap; gap:22px;
+  opacity:0; transform:translateY(-6px);
+  animation: navIn 0.6s ease forwards; animation-delay:0.1s;
 }
-.crumb:hover{ background:rgba(79,178,255,0.06); }
-.crumb .tilde{ color:var(--blue); text-shadow:var(--glow); }
-.crumb .sep{ color:#33414f; }
-.crumb .home{ color:var(--blue-bright); }
-.crumb-arrow{ font-size:10px; color:var(--text-dim); transition:transform 0.2s ease; }
-.crumb-wrap.open .crumb-arrow{ transform:rotate(180deg); }
-@keyframes fadeDown{ to{ opacity:1; transform:translateY(0); } }
-.crumb-menu{
-  position:absolute; top:calc(100% + 6px); left:0; min-width:140px;
-  background:rgba(8,10,14,0.97); border:1px solid var(--panel-border); border-radius:6px;
-  display:none; flex-direction:column; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,0.4);
+@keyframes navIn{ to{ opacity:1; transform:translateY(0); } }
+.nav a{
+  font-size:12px; letter-spacing:1.5px; color:var(--text-dim); text-decoration:none;
+  padding-bottom:4px; position:relative; transition:color 0.2s ease;
 }
-.crumb-wrap.open .crumb-menu{ display:flex; }
-.crumb-menu a{ padding:9px 14px; font-size:12px; color:var(--text); text-decoration:none; transition:background 0.15s ease, color 0.15s ease; }
-.crumb-menu a:hover{ background:rgba(79,178,255,0.08); color:var(--blue-bright); }
+.nav a:hover{ color:var(--blue-bright); }
+.nav a.active{ color:var(--blue-bright); }
+.nav a.active::after{
+  content:""; position:absolute; left:0; right:0; bottom:-4px; height:1px;
+  background:var(--blue); box-shadow:0 0 6px rgba(79,178,255,0.6);
+}
+@media (max-width:480px){ .nav{ gap:14px; } .nav a{ font-size:11px; } }
 
 .page-title{
   margin-top:34px; font-family:var(--pixel); font-size:clamp(22px,5vw,32px);
@@ -157,35 +152,17 @@ body::after{
 <div class="wrap">
 
   <div class="crumb-wrap" id="crumbWrap">
-    <button class="crumb" id="crumbToggle">
-      <span class="tilde">~</span><span class="sep">/</span><span class="home">contact</span>
-      <span class="crumb-arrow">▾</span>
-    </button>
-    <div class="crumb-menu">
-      <a href="/">home</a>
-      <a href="/faq.html">faq</a>
-      <a href="/changelog.html">changelog</a>
-      <a href="/writing">blogs</a>
-      <a href="/contact.html">contact</a>
-    </div>
+  <button class="crumb" id="crumbToggle">
+    <span class="tilde">~</span><span class="sep">/</span><span class="home">home</span>
+    <span class="crumb-arrow">▾</span>
+  </button>
+  <div class="crumb-menu">
+    <a href="/">home</a>
+    <a href="/faq.html">faq</a>
+    <a href="/changelog.html">changelog</a>
+    <a href="/writing">blogs</a>
   </div>
-
-  <div class="page-title">GET IN TOUCH</div>
-  <div class="page-sub"><span class="slash">//</span> tell me what you need built and I'll get back to you.</div>
-
-  <div class="section-label"><span>AVAILABILITY</span><span class="line"></span></div>
-
-  <!-- AVAILABILITY BLOCK — edit the two lines marked below whenever status changes -->
-  <div class="status-box">
-    <div class="status-row">
-      <span class="status-key">STATUS</span>
-      <span class="status-val ok"><span class="blinker"></span>AVAILABLE FOR WORK</span>
-    </div>
-    <div class="status-row">
-      <span class="status-key">RESPONSE TIME</span>
-      <span class="status-val">~24 HRS</span>
-    </div>
-  </div>
+</div>
 
   <div class="section-label"><span>PROJECT DETAILS</span><span class="line"></span></div>
 
@@ -219,15 +196,6 @@ body::after{
 </div>
 
 <script>
-(function(){
-  const wrap = document.querySelector('.crumb-wrap');
-  const toggle = document.getElementById('crumbToggle');
-  toggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    wrap.classList.toggle('open');
-  });
-  document.addEventListener('click', () => wrap.classList.remove('open'));
-})();
 </script>
 </body>
 </html>
