@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:title" content="echojxmes — contact">
-<meta property="og:description" content="Get in touch with echojxmes.">
-<meta property="og:image" content="echojxmes-logo-square.png">
+<meta property="og:description" content="Get in touch with me.">
+<meta property="og:image" content="logo.png">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="echojxmes-logo-square.png">
-<link rel="icon" type="image/png" href="echojxmes-logo-square.png">
+<meta name="twitter:image" content="logo.png">
+<link rel="icon" type="image/png" href="logo.png">
 <title>contact — echojxmes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -89,7 +89,6 @@ body::after{
 }
 .section-label .line{ flex:1; height:1px; background:linear-gradient(90deg, var(--panel-border), transparent); }
 
-/* status box (availability) */
 .status-box{
   margin-top:10px; width:100%; border:1px solid var(--panel-border);
   background:rgba(8,10,14,0.85); border-radius:8px; padding:16px 18px;
@@ -107,7 +106,6 @@ body::after{
 }
 @keyframes pulse{ 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:0.5; transform:scale(0.8); } }
 
-/* contact form block */
 .contact-form{ width:100%; display:flex; flex-direction:column; gap:16px; margin-top:10px; }
 .form-field{
   display:flex; flex-direction:column; gap:6px;
@@ -149,6 +147,8 @@ body::after{
 </style>
 </head>
 <body>
+<div class="wrap">
+
   <nav class="nav">
     <a href="/">HOME</a>
     <a href="/faq.html">FAQ</a>
@@ -158,9 +158,24 @@ body::after{
     <a href="/resume.html">RESUME</a>
   </nav>
 
+  <div class="page-title">GET IN TOUCH</div>
+  <div class="page-sub"><span class="slash">//</span> tell me what you need built and I'll get back to you.</div>
+
+  <div class="section-label"><span>AVAILABILITY</span><span class="line"></span></div>
+
+  <div class="status-box">
+    <div class="status-row">
+      <span class="status-key">STATUS</span>
+      <span class="status-val ok"><span class="blinker"></span>AVAILABLE FOR WORK</span>
+    </div>
+    <div class="status-row">
+      <span class="status-key">RESPONSE TIME</span>
+      <span class="status-val">~24 HRS</span>
+    </div>
+  </div>
+
   <div class="section-label"><span>PROJECT DETAILS</span><span class="line"></span></div>
 
-  <!-- CONTACT FORM BLOCK — uses the same Formspree endpoint as the homepage form -->
   <form action="https://formspree.io/f/xpqvoyel" method="POST" class="contact-form">
     <div class="form-field">
       <label for="emailField">Your email</label>
@@ -190,4 +205,3 @@ body::after{
 </div>
 </body>
 </html>
- 
