@@ -947,10 +947,10 @@ filterBtns.forEach(btn => {
       document.querySelector('.card-stat').textContent = formatted;
     }
   })
-  .catch(() => {}); // fails silently, keeps your fallback text
+  .catch(() => {});
 
 
-  // live visitor counter
+
 fetch('https://api.countapi.xyz/hit/echojxmes/visitors')
   .then(res => res.json())
   .then(data => {
@@ -958,7 +958,7 @@ fetch('https://api.countapi.xyz/hit/echojxmes/visitors')
   })
   .catch(() => {});
 
-// uptime 
+
 
 (function(){
   const uptimeEl = document.getElementById('uptimeVal');
@@ -994,7 +994,7 @@ fetch('https://api.countapi.xyz/hit/echojxmes/visitors')
   tick();
 })();
 
-// last deploy — update this date whenever you actually redeploy
+
 fetch('/api/last-deploy')
   .then(r => r.json())
   .then(data => {
@@ -1003,7 +1003,7 @@ fetch('/api/last-deploy')
       document.getElementById('lastDeploy').textContent = diffH < 1 ? 'just now' : diffH + 'h ago';
     }
   });
-// konami code easter egg (arrow keys + b + a)
+
 (function(){
   const seq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
   let pos = 0;
@@ -1022,7 +1022,7 @@ fetch('/api/last-deploy')
   });
 })();
 
-// pulls your real public repos live from GitHub's API — no key needed
+
 (function(){
   const username = 'echojxmes'; // <-- set this to your real username
   const grid = document.getElementById('projectsGrid');
@@ -1081,3 +1081,5 @@ document.querySelectorAll('.links .card').forEach((card, i) => {
 
 </body>
 </html>
+
+// a
