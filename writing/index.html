@@ -20,37 +20,38 @@
     background:transparent; border:none; cursor:pointer; font-family:inherit;
     padding:6px 10px; border-radius:5px; transition:background 0.2s ease;
   }
-  .crumb:hover{ background:rgba(79,178,255,0.06); }
-  .crumb .tilde{ color:var(--blue); }
-  .crumb .sep{ color:#33414f; }
-  .crumb .home{ color:var(--blue-bright); }
-  .crumb-arrow{ font-size:10px; color:var(--text-dim); transition:transform 0.2s ease; }
-  .crumb-wrap.open .crumb-arrow{ transform:rotate(180deg); }
-  .crumb-menu{
-    position:absolute; top:calc(100% + 6px); left:0;
-    min-width:140px; background:rgba(8,10,14,0.97);
-    border:1px solid var(--panel-border); border-radius:6px;
-    display:none; flex-direction:column; overflow:hidden;
-    box-shadow:0 8px 24px rgba(0,0,0,0.4); z-index:9999;
-  }
-  .crumb-wrap.open .crumb-menu{ display:flex; }
-  .crumb-menu a{ padding:9px 14px; font-size:12px; color:var(--text); text-decoration:none; }
-  .crumb-menu a:hover{ background:rgba(79,178,255,0.08); color:var(--blue-bright); }
+  .nav{
+  display:flex; flex-wrap:wrap; gap:22px;
+  opacity:0; transform:translateY(-6px);
+  animation: navIn 0.6s ease forwards; animation-delay:0.1s;
+}
+@keyframes navIn{ to{ opacity:1; transform:translateY(0); } }
+.nav a{
+  font-size:12px; letter-spacing:1.5px; color:var(--text-dim); text-decoration:none;
+  padding-bottom:4px; position:relative; transition:color 0.2s ease;
+}
+.nav a:hover{ color:var(--blue-bright); }
+.nav a.active{ color:var(--blue-bright); }
+.nav a.active::after{
+  content:""; position:absolute; left:0; right:0; bottom:-4px; height:1px;
+  background:var(--blue); box-shadow:0 0 6px rgba(79,178,255,0.6);
+}
+@media (max-width:480px){ .nav{ gap:14px; } .nav a{ font-size:11px; } }
 </style></head>
 <body>
 
   <div class="crumb-wrap" id="crumbWrap">
-    <button class="crumb" id="crumbToggle">
-      <span class="tilde">~</span><span class="sep">/</span><span class="home">writing</span>
-      <span class="crumb-arrow">▾</span>
-    </button>
-    <div class="crumb-menu">
-      <a href="/">home</a>
-      <a href="/faq.html">faq</a>
-      <a href="/changelog.html">changelog</a>
-      <a href="/writing">writing</a>
-    </div>
+  <button class="crumb" id="crumbToggle">
+    <span class="tilde">~</span><span class="sep">/</span><span class="home">home</span>
+    <span class="crumb-arrow">▾</span>
+  </button>
+  <div class="crumb-menu">
+    <a href="/">home</a>
+    <a href="/faq.html">faq</a>
+    <a href="/changelog.html">changelog</a>
+    <a href="/writing">blogs</a>
   </div>
+</div>
 
   <h1>// WRITING</h1>
   <a class="post" href="post-1.html"><span>Building the ultimate home lab (and breaking it twice)</span><span class="post-date">JUL 2026</span></a>
