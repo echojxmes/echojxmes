@@ -1,86 +1,62 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>changelog — echojxmes</title>
+<html><head><meta charset="UTF-8"><title>changelog</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-.crumb-wrap{
-  position:relative;
-  display:inline-block;
-  z-index:9999;
-}
+  :root{
+    --bg:#060608; --blue:#4fb2ff; --blue-bright:#7fd0ff;
+    --text:#d9e4ee; --text-dim:#5c6b7a; --panel-border:#1c2530;
+  }
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:'JetBrains Mono',monospace;
+    max-width:600px; margin:0 auto; padding:60px 24px; }
+  h1{ color:var(--blue-bright); font-size:18px; letter-spacing:2px; margin-top:34px; }
+  .entry{ border-left:2px solid var(--panel-border); padding-left:16px; margin-bottom:22px; }
+  .date{ color:var(--text-dim); font-size:11px; letter-spacing:1px; }
+  .desc{ font-size:13px; margin-top:4px; }
+  a{ color:var(--blue-bright); }
 
-.crumb{
-  font-size:13px;
-  letter-spacing:0.5px;
-  color:var(--text-dim);
-  display:flex;
-  align-items:center;
-  gap:8px;
-  background:transparent;
-  border:none;
-  cursor:pointer;
-  font-family:inherit;
-  padding:6px 10px;
-  border-radius:5px;
-  transition:background 0.2s ease;
-}
-.crumb:hover{ background:rgba(79,178,255,0.06); }
-.crumb .tilde{ color:var(--blue); }
-.crumb .sep{ color:#33414f; }
-.crumb .home{ color:var(--blue-bright); }
-
-.crumb-arrow{
-  font-size:10px;
-  color:var(--text-dim);
-  transition:transform 0.2s ease;
-}
-.crumb-wrap.open .crumb-arrow{ transform:rotate(180deg); }
-
-.crumb-menu{
-  position:absolute;
-  top:calc(100% + 6px);
-  left:0;
-  min-width:140px;
-  background:rgba(8,10,14,0.97);
-  border:1px solid var(--panel-border);
-  border-radius:6px;
-  display:none;
-  flex-direction:column;
-  overflow:hidden;
-  box-shadow:0 8px 24px rgba(0,0,0,0.4);
-  z-index:9999;
-}
-.crumb-wrap.open .crumb-menu{ display:flex; }
-
-.crumb-menu a{
-  padding:9px 14px;
-  font-size:12px;
-  color:var(--text);
-  text-decoration:none;
-  transition:background 0.15s ease, color 0.15s ease;
-}
-.crumb-menu a:hover{ background:rgba(79,178,255,0.08); color:var(--blue-bright); }
+  .crumb-wrap{ position:relative; display:inline-block; z-index:9999; }
+  .crumb{
+    font-size:13px; letter-spacing:0.5px; color:var(--text-dim);
+    display:flex; align-items:center; gap:8px;
+    background:transparent; border:none; cursor:pointer; font-family:inherit;
+    padding:6px 10px; border-radius:5px; transition:background 0.2s ease;
+  }
+  .crumb:hover{ background:rgba(79,178,255,0.06); }
+  .crumb .tilde{ color:var(--blue); }
+  .crumb .sep{ color:#33414f; }
+  .crumb .home{ color:var(--blue-bright); }
+  .crumb-arrow{ font-size:10px; color:var(--text-dim); transition:transform 0.2s ease; }
+  .crumb-wrap.open .crumb-arrow{ transform:rotate(180deg); }
+  .crumb-menu{
+    position:absolute; top:calc(100% + 6px); left:0;
+    min-width:140px; background:rgba(8,10,14,0.97);
+    border:1px solid var(--panel-border); border-radius:6px;
+    display:none; flex-direction:column; overflow:hidden;
+    box-shadow:0 8px 24px rgba(0,0,0,0.4); z-index:9999;
+  }
+  .crumb-wrap.open .crumb-menu{ display:flex; }
+  .crumb-menu a{ padding:9px 14px; font-size:12px; color:var(--text); text-decoration:none; }
+  .crumb-menu a:hover{ background:rgba(79,178,255,0.08); color:var(--blue-bright); }
 </style></head>
 <body>
-  <!-- paste your crumb-wrap dropdown here -->
+
+  <div class="crumb-wrap" id="crumbWrap">
+    <button class="crumb" id="crumbToggle">
+      <span class="tilde">~</span><span class="sep">/</span><span class="home">changelog</span>
+      <span class="crumb-arrow">▾</span>
+    </button>
+    <div class="crumb-menu">
+      <a href="/">home</a>
+      <a href="/faq.html">faq</a>
+      <a href="/changelog.html">changelog</a>
+      <a href="/writing">writing</a>
+    </div>
+  </div>
+
   <h1>// CHANGELOG</h1>
   <div class="entry"><div class="date">2026-07-25</div><div class="desc">Added live GitHub project feed, FAQ, and rates section</div></div>
   <div class="entry"><div class="date">2026-07-25</div><div class="desc">Added self-hosted uptime tracking</div></div>
   <div class="entry"><div class="date">2026-07-25</div><div class="desc">Launched site — links, gear setup, bio</div></div>
-</body>
-
-<div class="crumb-wrap" id="crumbWrap">
-  <button class="crumb" id="crumbToggle">
-    <span class="tilde">~</span><span class="sep">/</span><span class="home">changelog</span>
-    <span class="crumb-arrow">▾</span>
-  </button>
-  <div class="crumb-menu">
-    <a href="/">home</a>
-    <a href="/faq.html">faq</a>
-    <a href="/changelog.html">changelog</a>
-    <a href="/writing">writing</a>
-  </div>
-</div>
-
 
 <script>
 (function(){
@@ -90,4 +66,4 @@
   document.addEventListener('click', () => wrap.classList.remove('open'));
 })();
 </script>
-</html>
+</body></html>
