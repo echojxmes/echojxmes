@@ -1029,7 +1029,7 @@ fetch('/api/last-deploy')
   const username = 'echojxmes'; // <-- set this to your real username
   const grid = document.getElementById('projectsGrid');
 
-  fetch(`https:pi.github.com/users/${username}/repos?sort=updated&per_page=6`)
+  fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`)
     .then(r => {
       if(!r.ok) throw new Error(`GitHub API error: ${r.status}`);
       return r.json();
@@ -1064,7 +1064,7 @@ fetch('/api/last-deploy')
     });
 })();
 
-fetch('https: pi.github.com/users/echojxmes/repos?sort=updated&per_page=1')
+fetch('https://api.github.com/users/echojxmes/repos?sort=updated&per_page=1')
   .then(r => r.json())
   .then(repos => {
     if(repos[0]){
