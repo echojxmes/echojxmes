@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@ampproject/toolbox-optimizer": "^2.4.0",
     "@vercel/speed-insights": "^2.0.0"
   }
 }
