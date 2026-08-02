@@ -533,15 +533,14 @@ body.shake{ animation: shake 0.4s ease infinite; }
   animation: navIn 0.6s ease forwards; animation-delay:0.05s;
  }
 
-  .stat-fall{
+.stat-fall{
   display:inline-block;
   font-size:11px;
   color:var(--text-dim);
   opacity:0;
-  transform:translateY(-40px);
-  filter:blur(2px);
-  animation: statFallIn 0.7s cubic-bezier(.25,.9,.4,1.25) forwards;
-  animation-delay:0.05s;
+  transform:translateY(-6px);
+  animation: navIn 0.6s ease forwards;
+  animation-delay:0.1s;
 }
 @keyframes statFallIn{
   0%{ opacity:0; transform:translateY(-40px); filter:blur(3px); }
@@ -687,9 +686,10 @@ body.shake{ animation: shake 0.4s ease infinite; }
 <body>
 
   <div class="glitch-overlay" id="glitchOverlay">CONTAINER BREACHED</div>
+  
+  <span id="visitorCount" class="stat-fall">----</span>
 
 <div class="wrap">
-<span id="visitorCount" class="nav">----</span>
 
 <nav class="nav">
   <a href="/" class="active">HOME</a>
