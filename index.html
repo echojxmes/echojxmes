@@ -959,14 +959,12 @@ filterBtns.forEach(btn => {
   .catch(() => {});
 
 
-
-fetch('https://api.countapi.xyz/hit/echojxmes/visitors')
+fetch('/api/visit')
   .then(res => res.json())
   .then(data => {
-    document.getElementById('visitorCount').textContent = String(data.value).padStart(4,'0');
+    document.getElementById('visitorCount').textContent = String(data.count).padStart(4,'0');
   })
   .catch(() => {});
-
 
 
 (function(){
