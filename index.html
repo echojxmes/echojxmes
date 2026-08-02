@@ -457,6 +457,23 @@ body.shake{ animation: shake 0.4s ease infinite; }
 .last-commit{ font-size:11px; color:var(--text-dim); text-align:center; margin-top:10px; }
 .last-commit .slash{ color:var(--blue); }
 
+.stat-fall{
+  display:inline-block;
+  font-size:11px;
+  color:var(--text-dim);
+  opacity:0;
+  transform:translateY(-40px);
+  filter:blur(2px);
+  animation: statFallIn 0.7s cubic-bezier(.25,.9,.4,1.25) forwards;
+  animation-delay:1.8s;
+}
+@keyframes statFallIn{
+  0%{ opacity:0; transform:translateY(-40px); filter:blur(3px); }
+  60%{ opacity:1; transform:translateY(3px); filter:blur(0); }
+  80%{ transform:translateY(-2px); }
+  100%{ opacity:1; transform:translateY(0); filter:blur(0); }
+}
+
   /* logo */
   .logo{
     margin-top:26px;
@@ -726,13 +743,13 @@ body.shake{ animation: shake 0.4s ease infinite; }
       <a class="card-sub" href="contact.html" target="_blank">view media kit &#8599;</a>
     </span>
   </span>
-  <a class="arrow" href="mailto:you@example.com" style="text-decoration:none;">&#8594;</a>
+  <a class="arrow" href="mailto:echojxmes@gmail.com" style="text-decoration:none;">&#8594;</a>
 </div>
 
 <form action="https://formspree.io/f/xpqvoyel" method="POST" class="contact-form">
   <div class="form-field">
     <label for="emailField">Your email</label>
-    <input type="email" id="emailField" name="email" placeholder="you@example.com" required>
+    <input type="email" id="emailField" name="email" placeholder="echojxmes@gmail.com" required>
     <span class="field-hint">so I can reply to you</span>
   </div>
 
