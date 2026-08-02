@@ -534,10 +534,22 @@ body.shake{ animation: shake 0.4s ease infinite; }
  }
 
   .stat-fall{
-  display:flex; flex-wrap:wrap; gap:22px;
-  opacity:0; transform:translateY(-6px);
-  animation: navIn 0.6s ease forwards; animation-delay:0.1s;
+  display:inline-block;
+  font-size:11px;
+  color:var(--text-dim);
+  opacity:0;
+  transform:translateY(-40px);
+  filter:blur(2px);
+  animation: statFallIn 0.7s cubic-bezier(.25,.9,.4,1.25) forwards;
+  animation-delay:0.05s;
 }
+@keyframes statFallIn{
+  0%{ opacity:0; transform:translateY(-40px); filter:blur(3px); }
+  60%{ opacity:1; transform:translateY(3px); filter:blur(0); }
+  80%{ transform:translateY(-2px); }
+  100%{ opacity:1; transform:translateY(0); filter:blur(0); }
+}
+
 @keyframes navIn{ to{ opacity:1; transform:translateY(0); } }
 .nav a{
   font-size:12px; letter-spacing:1.5px; color:var(--text-dim); text-decoration:none;
@@ -976,7 +988,7 @@ filterBtns.forEach(btn => {
 fetch('/api/visits')
   .then(res => res.json())
   .then(data => {
-    document.getElementById('visitorCount').textContent = String(data.count).padStart(4,'0');
+    document.getElementById('visitorCount').textContent = 'visitors: ' + String(data.count).padStart(4,'0');
   })
   .catch(() => {});
 
