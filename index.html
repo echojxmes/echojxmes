@@ -1086,6 +1086,8 @@ fetch('https://api.github.com/users/echojxmes/repos?sort=updated&per_page=1')
 document.querySelectorAll('.links .card').forEach((card, i) => {
   card.style.setProperty('--d', `${i * 0.1}s`);
 });
+
+fetch('/api/ping').catch(() => {});
 </script>
 
 </body>

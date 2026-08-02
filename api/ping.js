@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   let isUp = true;
 
   try {
-    const response = await fetch('https://yourdomain.com', { method: 'HEAD' });
+    const response = await fetch('https://echojxmes.com', { method: 'HEAD' });
     isUp = response.ok;
   } catch {
     isUp = false;
