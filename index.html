@@ -959,7 +959,7 @@ filterBtns.forEach(btn => {
   .catch(() => {});
 
 
-fetch('/api/visit')
+fetch('/api/visits')
   .then(res => res.json())
   .then(data => {
     document.getElementById('visitorCount').textContent = String(data.count).padStart(4,'0');
