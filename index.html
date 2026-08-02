@@ -687,10 +687,9 @@ body.shake{ animation: shake 0.4s ease infinite; }
 
   <div class="glitch-overlay" id="glitchOverlay">CONTAINER BREACHED</div>
   
-  <span id="visitorCount" class="stat-fall">----</span>
 
 <div class="wrap">
-
+<span id="visitorCount" class="stat-fall">----</span>
 <nav class="nav">
   <a href="/" class="active">HOME</a>
   <a href="/faq.html">FAQ</a>
@@ -988,7 +987,7 @@ filterBtns.forEach(btn => {
 fetch('/api/visits')
   .then(res => res.json())
   .then(data => {
-    document.getElementById('visitorCount').textContent = 'visitors: ' + String(data.count).padStart(4,'0');
+    document.getElementById('visitorCount').textContent = 'VISITORS: ' + String(data.count).padStart(4,'0');
   })
   .catch(() => {});
 
