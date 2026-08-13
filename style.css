@@ -547,3 +547,194 @@ body::after{
   *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition:none !important; }
   .logo-line{ opacity:1; transform:none; filter:none; }
 }
+
+/* Shared page wrapper (used by faq/changelog/contact — index.html uses .wrap) */
+.wrapper{
+  position:relative;
+  z-index:1;
+  max-width:640px;
+  margin:0 auto;
+  padding:56px 24px 80px;
+}
+
+h1{
+  font-size:15px;
+  letter-spacing:2px;
+  color:var(--orange-bright);
+  text-shadow:0 0 12px rgba(255,95,31,0.35);
+  margin-top:34px;
+  margin-bottom:28px;
+  font-weight:700;
+}
+
+/* FAQ accordion */
+.faq-list{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.faq-item{
+  border:1px solid var(--panel-border);
+  background:linear-gradient(180deg, rgba(14,18,24,0.9), rgba(8,10,14,0.9));
+  border-radius:8px;
+  padding:4px 18px;
+  transition:border-color 0.25s ease;
+}
+.faq-item:hover{
+  border-color:var(--orange-dim);
+}
+.faq-item[open]{
+  border-color:var(--orange);
+  box-shadow:0 0 16px rgba(255,95,31,0.12);
+}
+
+.faq-item summary{
+  padding:14px 0;
+  font-size:13px;
+  font-weight:700;
+  color:var(--text);
+  cursor:pointer;
+  list-style:none;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.faq-item summary::-webkit-details-marker{ display:none; }
+.faq-item summary::after{
+  content:"+";
+  color:var(--orange-bright);
+  font-size:16px;
+  transition:transform 0.25s ease;
+}
+.faq-item[open] summary::after{
+  transform:rotate(45deg);
+}
+
+.faq-item p{
+  font-size:12px;
+  line-height:1.7;
+  color:var(--text-dim);
+  padding-bottom:16px;
+  margin:0;
+}
+
+/* Blog/writing list */
+.post-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.post{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 18px;
+  border:1px solid var(--panel-border);
+  background:linear-gradient(180deg, rgba(14,18,24,0.9), rgba(8,10,14,0.9));
+  border-radius:8px;
+  text-decoration:none;
+  color:var(--text);
+  font-size:13px;
+  font-weight:700;
+  transition:border-color 0.25s ease, transform 0.25s ease;
+}
+.post:hover{
+  border-color:var(--orange-dim);
+  transform:translateY(-2px);
+}
+.post-date{
+  font-size:11px;
+  font-weight:400;
+  color:var(--text-dim);
+  letter-spacing:1px;
+}
+
+/* Changelog */
+.entry{
+  display:flex;
+  gap:16px;
+  padding:14px 0;
+  border-bottom:1px solid var(--panel-border);
+  font-size:13px;
+}
+.entry:last-child{ border-bottom:none; }
+.entry .date{
+  color:var(--orange-bright);
+  font-weight:700;
+  white-space:nowrap;
+  min-width:90px;
+}
+.entry .desc{
+  color:var(--text-dim);
+  line-height:1.5;
+}
+
+/* Contact page headings */
+.page-title{
+  font-size:15px;
+  letter-spacing:2px;
+  color:var(--orange-bright);
+  text-shadow:0 0 12px rgba(255,95,31,0.35);
+  margin-top:34px;
+  font-weight:700;
+}
+.page-sub{
+  font-size:12.5px;
+  color:var(--text-dim);
+  margin-top:8px;
+  margin-bottom:8px;
+}
+.page-sub .slash{ color:var(--orange); }
+
+.other-ways{
+  margin-top:24px;
+  font-size:12px;
+  color:var(--text-dim);
+  text-align:center;
+}
+.other-ways .slash{ color:var(--orange); }
+.other-ways a{
+  color:var(--orange-bright);
+  text-decoration:underline;
+}
+
+/* select wasn't covered by the input/textarea rule */
+.form-field select{
+  background:rgba(10,13,18,0.8);
+  border:1px solid var(--panel-border);
+  border-radius:6px;
+  padding:10px 12px;
+  color:var(--text);
+  font-family:var(--mono);
+  font-size:12px;
+}
+.form-field select:focus{
+  outline:none;
+  border-color:var(--orange);
+  box-shadow:0 0 0 1px var(--orange), 0 0 16px rgba(255,95,31,0.3);
+}
+
+/* 404 page has no .wrap/.wrapper — style body content directly */
+body > h1{
+  text-align:center;
+  margin-top:80px;
+  font-size:48px;
+  color:var(--orange-bright);
+  text-shadow:0 0 20px rgba(255,95,31,0.5);
+}
+body > p{
+  text-align:center;
+  color:var(--text-dim);
+  font-size:13px;
+}
+body > a{
+  display:block;
+  text-align:center;
+  margin-top:20px;
+  color:var(--orange-bright);
+  text-decoration:none;
+}
+body > a:hover{
+  text-decoration:underline;
+}
