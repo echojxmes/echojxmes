@@ -8,7 +8,7 @@
 
 ## `01 // about_me`
 
-I'm a developer with an interest in software engineering, computer science, and technology. I enjoy building projects, solving problems, experimenting with new ideas, and understanding how things work under the hood.
+I'm a 14yr old developer with an interest in software engineering, computer science, and technology. I enjoy building projects, solving problems, experimenting with new ideas, and understanding how things work under the hood.
 
 I'm particularly interested in developing my skills beyond the basics and eventually pursuing a career in software engineering.
 
